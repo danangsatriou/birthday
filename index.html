@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sayaangkuu</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #fbfcfc;
+        text-align: center;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+    .container {
+        padding-top: 50px;
+    }
+    video {
+        width: 300px;
+        height: auto;
+        /*border-radius: 15px;*/
+        /*box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);*/
+    }
+    h1 {
+        font-size: 28px;
+        color: #ff4d6d;
+        margin-top: 20px;
+    }
+    .hearts {
+        font-size: 40px;
+        margin: 10px 0;
+        animation: pulse 1s infinite;
+        /*animation: bounce 1s infinite;*/
+        opacity: 0;
+        animation: fadeIn 1s ease forwards, pulse 1s infinite 2s;
+        animation-delay: 1.5s, 2s;
+    }
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+    .btn-next {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 24px;
+        background: #ff4d6d;
+        color: white;
+        border-radius: 25px;
+        text-decoration: none;
+        font-size: 18px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+    .btn-next:hover {
+        background: #ff6f91;
+        transform: scale(1.05);
+    }
+    img {
+        max-width: 200px;
+        border-radius: 100px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        margin-bottom: 20px;
+        opacity: 0;
+        animation: fadeIn 1s ease forwards;
+        animation-delay: 0.5s;
+    }
+    h1 {
+        font-size: 36px;
+        color: #ff4d6d;
+        margin: 10px 0;
+        animation: bounce 1s infinite;
+        opacity: 0;
+        animation: fadeIn 1s ease forwards, bounce 1s infinite 2s;
+        animation-delay: 1.5s, 2s;
+    }
+    h2 {
+        font-size: 16px;
+        color: #ff4d6d;
+        margin: 10px 0;
+        opacity: 0;
+        animation: fadeIn 1s ease forwards, pulse 1s infinite 2s;
+        animation-delay: 1.5s, 2s;
+    }
+    p {
+        font-size: 18px;
+        color: #444;
+        margin: 10px auto;
+        width: 80%;
+        max-width: 500px;
+        background: rgba(255,255,255,0.8);
+        padding: 10px;
+        border-radius: 10px;
+        /*opacity: 0;
+        animation: fadeIn 1s ease forwards;
+        animation-delay: 3s;*/
+    }
+    .button2 {
+        opacity: 0;
+        animation: fadeIn 5s ease forwards;
+        animation-delay: 3s;
+    }
+    .button3 {
+        opacity: 0;
+        animation: fadeIn 5s ease forwards;
+        animation-delay: 16s;
+    }
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 0;
+    }
+    .content {
+        z-index: 1;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        position: relative;
+    }
+    /* Balon */
+    .balloon {
+        position: absolute;
+        bottom: -150px;
+        width: 50px;
+        height: 70px;
+        background-color: red;
+        border-radius: 25px 25px 0 0;
+        animation: floatUp 8s linear infinite;
+        z-index: 0;
+    }
+    .balloon::after {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        width: 2px;
+        height: 20px;
+        background-color: black;
+        transform: translateX(-50%);
+    }
+    @keyframes floatUp {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(-120vh) rotate(10deg); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <canvas id="confetti"></canvas>
+
+    <script>
+        let music = new Audio('adurayu.mp3');
+        music.loop = true;
+        function typeWriterEffect(el, text, speed=50, callback) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+
+
+        /* Halaman 1 (Index) */
+        function loadIndex() {
+            document.getElementById('app').innerHTML = `
+
+                <div class="container">
+                    <video autoplay loop muted playsinline>
+                        <source src="animation.gif.mp4" type="video/mp4">
+                        Browser kamu tidak mendukung video.
+                    </video>
+
+                    <h1>🎂 Happy Birthday Sayaangkuu 🎂</h1>
+                    <div class="hearts">❤️❤️❤️</div>
+
+                    <button id="startBtn" class="btn-next button2">Open Sayy 🎁</button>
+                </div>
+            `;
+            document.getElementById('startBtn').onclick = () => {
+                music.play();
+                loadKejutan();
+            };
+        }
+
+        /* Halaman 2 (Kejutan) */
+        function loadKejutan() {
+            document.getElementById('app').innerHTML = `
+
+                <div class="content">
+                    <img src="foto.jpg" alt="Foto Kamu">
+                    <h1>🎉 Selamat Ulang Tahun, Sayangku! 🎉</h1>
+                    <p id="ucapan">
+                        ️
+                    </p>
+                    <button onclick="loadPage3()" class="btn-next button3">Lanjut ➡️</button>   
+                </div>
+            `;
+            setTimeout(() => {
+                typeWriterEffect(document.getElementById('ucapan'), "Semoga di hari spesial ini, semua kebahagiaan, cinta, dan keberuntungan selalu menyertaimu. Terima kasih sudah jadi bagian terindah dalam hidupku. I love you ❤️❤️❤️❤️ ", 60, () => {
+                    document.getElementById('nextBtn').style.display = "inline-block";
+                    document.getElementById('nextBtn').onclick = loadPage3;
+                });
+            }, 4000); // delay 2 detik
+        }
+
+        /* Halaman 3 */
+        function loadPage3() {
+            document.getElementById('app').innerHTML = `
+
+                <div class="content">
+                    <h1>Semoga lancar sampai akad nikah nanti ya <br/> Sayaangkuu, Cintakuu, Maniskuu ❤</h1>
+
+                    <p id="prank"></p>
+
+                    <h2 id="prank2"></h2>
+
+                </div>
+            `;
+            setTimeout(() => {
+                typeWriterEffect(document.getElementById('prank'), "KADONYA UDAH DIKASIH KEMARIN YA", 60, () => {
+                    document.getElementById('nextBtn').style.display = "inline-block";
+                    document.getElementById('nextBtn').onclick = loadPage3;
+                });
+            }, 5000); // delay 2 detik
+            setTimeout(() => {
+                typeWriterEffect(document.getElementById('prank2'), "JANGAN NAGIH LAGI 😭😭😭😭😭 ", 60, () => {
+                    document.getElementById('nextBtn').style.display = "inline-block";
+                    document.getElementById('nextBtn').onclick = loadPage3;
+                });
+            }, 5000); // delay 2 detik
+        }
+
+        loadIndex();
+    </script>
+    <script>
+        // Confetti sederhana
+        const canvas = document.getElementById("confetti");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        for (let i = 0; i < 200; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 6 + 2,
+                d: Math.random() * 200,
+                color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                tilt: Math.random() * 10 - 10
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, false);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            update();
+        }
+
+        let angle = 0;
+        function update() {
+            angle += 0.01;
+            particles.forEach(p => {
+                p.y += Math.cos(angle + p.d) + 1 + p.r / 2;
+                p.x += Math.sin(angle) * 2;
+                if (p.y > canvas.height) {
+                    p.y = 0;
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+        }
+
+        setInterval(draw, 20);
+
+        // Tambahkan balon random warna dan posisi
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = Math.random() * window.innerWidth + 'px';
+            balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
+            balloon.style.animationDuration = (6 + Math.random() * 4) + 's';
+            document.body.appendChild(balloon);
+
+            setTimeout(() => {
+                balloon.remove();
+            }, 10000);
+        }
+
+        setInterval(createBalloon, 800);
+    </script>
+</body>
+</html>
