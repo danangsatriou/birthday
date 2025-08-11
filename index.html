@@ -11,7 +11,7 @@
         padding: 0;
         background: #fbfcfc;
         text-align: center;
-        font-family: 'Poppins', Arial, sans-serif;
+        font-family: 'Comic Sans MS', cursive, sans-serif;
     }
     .container {
         padding-top: 50px;
@@ -231,8 +231,10 @@
         function loadPage3() {
             document.getElementById('app').innerHTML = `
 
-                <div class="content">
-                    <h1>Semoga lancar sampai akad nikah nanti ya <br/> Sayaangkuu, Cintakuu, Maniskuu ❤</h1>
+                 <div class="content">
+                    <img src="foto2.jpg" alt="Foto Kamu">
+                    <h1 id="page3"></h1>
+                    <h1 id="page32"></h1>
 
                     <p id="prank"></p>
 
@@ -240,18 +242,30 @@
 
                 </div>
             `;
+             setTimeout(() => {
+                typeWriterEffect(document.getElementById('page3'), "Semoga lancar sampai akad nikah nanti ya", 60, () => {
+                    document.getElementById('nextBtn').style.display = "inline-block";
+                    document.getElementById('nextBtn').onclick = loadPage3;
+                });
+            }, 2000); // delay 2 detik
+            setTimeout(() => {
+                typeWriterEffect(document.getElementById('page32'), "Sayaangkuu, Cintakuu, Maniskuu ❤", 60, () => {
+                    document.getElementById('nextBtn').style.display = "inline-block";
+                    document.getElementById('nextBtn').onclick = loadPage3;
+                });
+            }, 5000); // delay 2 detik
             setTimeout(() => {
                 typeWriterEffect(document.getElementById('prank'), "KADONYA UDAH DIKASIH KEMARIN YA", 60, () => {
                     document.getElementById('nextBtn').style.display = "inline-block";
                     document.getElementById('nextBtn').onclick = loadPage3;
                 });
-            }, 5000); // delay 2 detik
+            }, 8000); // delay 2 detik
             setTimeout(() => {
                 typeWriterEffect(document.getElementById('prank2'), "JANGAN NAGIH LAGI 😭😭😭😭😭 ", 60, () => {
                     document.getElementById('nextBtn').style.display = "inline-block";
                     document.getElementById('nextBtn').onclick = loadPage3;
                 });
-            }, 5000); // delay 2 detik
+            }, 11000); // delay 2 detik
         }
 
         loadIndex();
